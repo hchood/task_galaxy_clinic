@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916194131) do
+ActiveRecord::Schema.define(version: 20140916194708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20140916194131) do
     t.datetime "updated_at"
     t.integer  "task_list_id"
   end
+
+  create_table "user_task_lists", force: true do |t|
+    t.integer  "user_id",      null: false
+    t.integer  "task_list_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_task_lists", ["user_id", "task_list_id"], name: "index_user_task_lists_on_user_id_and_task_list_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",      null: false
